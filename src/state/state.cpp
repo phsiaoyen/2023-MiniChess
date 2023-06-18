@@ -16,8 +16,18 @@ int State::evaluate(){
   int myPoint=0,opponentPoint=0;
   for(int i=0;i<BOARD_H;i++){
     for(int j=0;j<BOARD_W;j++){
-        myPoint+=board.board[0][i][j]-'0';
-        opponentPoint+=board.board[1][i][j]-'0';
+      if(board.board[player][i][j]==1)myPoint+=2;
+      else if(board.board[player][i][j]==2)myPoint+=6;
+      else if(board.board[player][i][j]==3)myPoint+=7;
+      else if(board.board[player][i][j]==4)myPoint+=8;
+      else if(board.board[player][i][j]==5)myPoint+=20;
+      else if(board.board[player][i][j]==6)myPoint+=100000;
+      if(board.board[1-player][i][j]==1)myPoint+=2;
+      else if(board.board[1-player][i][j]==2)opponentPoint+=6;
+      else if(board.board[1-player][i][j]==3)opponentPoint+=7;
+      else if(board.board[1-player][i][j]==4)opponentPoint+=8;
+      else if(board.board[1-player][i][j]==5)opponentPoint+=20;
+      else if(board.board[1-player][i][j]==6)opponentPoint+=100000;
     }
   }
   return myPoint-opponentPoint;
