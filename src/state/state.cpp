@@ -13,7 +13,15 @@
  */
 int State::evaluate(){
   // [TODO] design your own evaluation function
-  return 0;
+  int myPoint=0,opponentPoint=0;
+  for(int i=0;i<BOARD_H;i++){
+    for(int j=0;j<BOARD_W;j++){
+        myPoint+=board.board[0][i][j]-'0';
+        opponentPoint+=board.board[1][i][j]-'0';
+    }
+  }
+  return myPoint-opponentPoint;
+  //return 0;
 }
 
 
@@ -212,10 +220,10 @@ void State::get_legal_actions(){
 }
 
 
-const char piece_table[2][7][5] = {
-  {" ", "♙", "♖", "♘", "♗", "♕", "♔"},
-  {" ", "♟", "♜", "♞", "♝", "♛", "♚"}
-};
+//const char piece_table[2][7][5] = {
+//  {" ", "♙", "♖", "♘", "♗", "♕", "♔"},
+//  {" ", "♟", "♜", "♞", "♝", "♛", "♚"}
+//};
 /**
  * @brief encode the output for command line output
  * 
