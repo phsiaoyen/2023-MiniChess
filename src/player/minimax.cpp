@@ -42,7 +42,7 @@ void write_valid_spot(std::ofstream& fout) {
   // Keep updating the output until getting killed.
   while(true) {
     // Choose a random spot.
-    auto move = Minimax::get_move(root, 0);
+    auto move = Minimax::get_move(root, 50);
     /*for(auto it=root->legal_actions.begin();it!=root->legal_actions.end();it++){
       //int value=Minimax::minimax(root,10,true);
     }*/

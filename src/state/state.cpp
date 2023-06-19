@@ -11,23 +11,102 @@
  * 
  * @return int 
  */
+const int pawn_board_val[2][6][5]={{
+  {0,0,0,0,0},
+  {2,4,6,4,2},
+  {2,4,6,4,2},
+  {0,2,4,2,0},
+  {0,2,4,2,0},
+  {0,0,0,0,0},
+},{
+  {0,0,0,0,0},
+  {0,2,4,2,0},
+  {0,2,4,2,0},
+  {2,4,6,4,2},
+  {2,4,6,4,2},
+  {0,0,0,0,0},
+}};
+const int rook_board_val[2][6][5]={{
+  {5,5,5,5,5},
+  {4,4,4,4,4},
+  {3,3,3,3,3},
+  {2,2,2,2,2},
+  {1,1,1,1,1},
+  {0,0,0,0,0},
+},{
+  {0,0,0,0,0},
+  {1,1,1,1,1},
+  {2,2,2,2,2},
+  {3,3,3,3,3},
+  {4,4,4,4,4},
+  {5,5,5,5,5},
+}};
+const int knight_board_val[2][6][5]={{
+  {0,0,0,0,0},
+  {4,6,6,4,2},
+  {6,8,8,6,4},
+  {4,6,6,4,2},
+  {2,4,4,2,0},
+  {0,0,0,0,0},
+},{
+  {0,0,0,0,0},
+  {0,2,4,4,2},
+  {2,4,6,6,4},
+  {4,6,8,8,6},
+  {2,4,6,6,4},
+  {0,0,0,0,0},
+}};
+const int bishop_board_val[2][6][5]={{
+  {4,3,2,3,4},
+  {3,4,3,4,3},
+  {2,3,4,3,2},
+  {3,4,3,4,3},
+  {4,3,2,3,4},
+  {1,2,3,2,1},
+},{
+  {1,2,3,2,1},
+  {4,3,2,3,4},
+  {3,4,3,4,3},
+  {2,3,4,3,2},
+  {3,4,3,4,3},
+  {4,3,2,3,4},
+}};
+const int queen_board_val[2][6][5]={{
+  {10,10,10,10,10},
+  {10,12,12,12,10},
+  {8,12,14,12,8},
+  {6,12,12,12,6},
+  {4,10,10,10,4},
+  {2,4,6,4,2},
+},{
+  {2,4,6,4,2},
+  {4,10,10,10,4},
+  {6,12,12,12,6},
+  {8,12,14,12,8},
+  {10,12,12,12,10},
+  {10,10,10,10,10},
+}};
 int State::evaluate(){
   // [TODO] design your own evaluation function
   int myPoint=0,opponentPoint=0;
+  int mykingrow=-1,mykingcol=-1,oppnkingrow=-2,oppnkingcol=-2;
+  int nowpiece;
   for(int i=0;i<BOARD_H;i++){
     for(int j=0;j<BOARD_W;j++){
-      if(board.board[player][i][j]==1)myPoint+=2;
-      else if(board.board[player][i][j]==2)myPoint+=6;
-      else if(board.board[player][i][j]==3)myPoint+=7;
-      else if(board.board[player][i][j]==4)myPoint+=8;
-      else if(board.board[player][i][j]==5)myPoint+=20;
+      if(board.board[player][i][j]==1)myPoint+=2+pawn_board_val[player][i][j];
+      else if(board.board[player][i][j]==2)myPoint+=6+rook_board_val[player][i][j];
+      else if(board.board[player][i][j]==3)myPoint+=7+knight_board_val[player][i][j];
+      else if(board.board[player][i][j]==4)myPoint+=8+bishop_board_val[player][i][j];
+      else if(board.board[player][i][j]==5)myPoint+=20+queen_board_val[player][i][j];
       else if(board.board[player][i][j]==6)myPoint+=100000;
-      if(board.board[1-player][i][j]==1)myPoint+=2;
-      else if(board.board[1-player][i][j]==2)opponentPoint+=6;
-      else if(board.board[1-player][i][j]==3)opponentPoint+=7;
-      else if(board.board[1-player][i][j]==4)opponentPoint+=8;
-      else if(board.board[1-player][i][j]==5)opponentPoint+=20;
+      if(board.board[1-player][i][j]==1)myPoint+=2+pawn_board_val[1-player][i][j];
+      else if(board.board[1-player][i][j]==2)opponentPoint+=6+rook_board_val[1-player][i][j];
+      else if(board.board[1-player][i][j]==3)opponentPoint+=7+knight_board_val[1-player][i][j];
+      else if(board.board[1-player][i][j]==4)opponentPoint+=8+bishop_board_val[1-player][i][j];
+      else if(board.board[1-player][i][j]==5)opponentPoint+=20+queen_board_val[1-player][i][j];
       else if(board.board[1-player][i][j]==6)opponentPoint+=100000;
+      if(board.board[player][i][j]==6)mykingrow=i;mykingcol=j;
+      if(board.board[1-player][i][j]==6)oppnkingrow=i;oppnkingcol=j;
     }
   }
   return myPoint-opponentPoint;
