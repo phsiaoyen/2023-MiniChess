@@ -89,8 +89,6 @@ const int queen_board_val[2][6][5]={{
 int State::evaluate(){
   // [TODO] design your own evaluation function
   int myPoint=0,opponentPoint=0;
-  int mykingrow=-1,mykingcol=-1,oppnkingrow=-2,oppnkingcol=-2;
-  int nowpiece;
   for(int i=0;i<BOARD_H;i++){
     for(int j=0;j<BOARD_W;j++){
       if(board.board[player][i][j]==1)myPoint+=2+pawn_board_val[player][i][j];
@@ -98,15 +96,13 @@ int State::evaluate(){
       else if(board.board[player][i][j]==3)myPoint+=7+knight_board_val[player][i][j];
       else if(board.board[player][i][j]==4)myPoint+=8+bishop_board_val[player][i][j];
       else if(board.board[player][i][j]==5)myPoint+=20+queen_board_val[player][i][j];
-      else if(board.board[player][i][j]==6)myPoint+=100000;
+      else if(board.board[player][i][j]==6)myPoint+=1000;
       if(board.board[1-player][i][j]==1)myPoint+=2+pawn_board_val[1-player][i][j];
       else if(board.board[1-player][i][j]==2)opponentPoint+=6+rook_board_val[1-player][i][j];
       else if(board.board[1-player][i][j]==3)opponentPoint+=7+knight_board_val[1-player][i][j];
       else if(board.board[1-player][i][j]==4)opponentPoint+=8+bishop_board_val[1-player][i][j];
       else if(board.board[1-player][i][j]==5)opponentPoint+=20+queen_board_val[1-player][i][j];
-      else if(board.board[1-player][i][j]==6)opponentPoint+=100000;
-      if(board.board[player][i][j]==6)mykingrow=i;mykingcol=j;
-      if(board.board[1-player][i][j]==6)oppnkingrow=i;oppnkingcol=j;
+      else if(board.board[1-player][i][j]==6)opponentPoint+=1000;
     }
   }
   return myPoint-opponentPoint;
@@ -309,10 +305,10 @@ void State::get_legal_actions(){
 }
 
 
-//const char piece_table[2][7][5] = {
-//  {" ", "♙", "♖", "♘", "♗", "♕", "♔"},
-//  {" ", "♟", "♜", "♞", "♝", "♛", "♚"}
-//};
+const char piece_table[2][7][5] = {
+  {" ", "♙", "♖", "♘", "♗", "♕", "♔"},
+  {" ", "♟", "♜", "♞", "♝", "♛", "♚"}
+};
 /**
  * @brief encode the output for command line output
  * 
