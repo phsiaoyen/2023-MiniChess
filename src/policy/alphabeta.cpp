@@ -27,29 +27,6 @@ Move Alphabeta::get_move(State *state, int depth){
     }
   }
   return move;
-  /*if(state->player==0){
-    int value=-1e9;
-    for(Move it:actions){
-     State *nextState=state->next_state(it);
-      int comp=alphabeta(nextState,depth-1,-1e9,1e9,false);
-      if(comp>value){
-        move=it;
-        value=comp;
-      }
-    }
-    return move;
-  }else{
-    int value=1e9;
-    for(Move it:actions){
-     State *nextState=state->next_state(it);
-      int comp=alphabeta(nextState,depth-1,-1e9,1e9,true);
-      if(comp<value){
-        move=it;
-        value=comp;
-      }
-    }
-    return move;
-  }*/
 }
 
 int Alphabeta::alphabeta(State *state, int depth, int alpha, int beta, bool maximizingPlayer){

@@ -27,29 +27,6 @@ Move Minimax::get_move(State *state, int depth){
     }
   }
   return move;
-  /*if(state->player==0){
-    int value=-1e9;
-    for(Move it:actions){
-     State *nextState=state->next_state(it);
-      int comp=minimax(nextState,depth-1,false);
-      if(comp>value){
-        move=it;
-        value=comp;
-      }
-    }
-    return move;
-  }else{
-    int value=1e9;
-    for(Move it:actions){
-     State *nextState=state->next_state(it);
-      int comp=minimax(nextState,depth-1,true);
-      if(comp<value){
-        move=it;
-        value=comp;
-      }
-    }
-    return move;
-  }*/
 }
 
 int Minimax::minimax(State *state, int depth, bool maximizingPlayer){
